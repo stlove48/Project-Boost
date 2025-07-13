@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour
     int score = 0;
     public int Score { get { return score; } }
 
+    int fuelBonus = 0;
+
     private void Awake()
     {
         if (smInstance != null && smInstance != this)
@@ -26,8 +28,6 @@ public class ScoreManager : MonoBehaviour
         {
             smInstance = this;
         }
-
-        
     }
 
     private void OnEnable()
@@ -39,7 +39,7 @@ public class ScoreManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.ShipLanded -= CalculateScore;
-        EventManager.ScoreChanged += AddScore;
+        EventManager.ScoreChanged -= AddScore;
     }
 
     // Update is called once per frame
@@ -71,6 +71,22 @@ public class ScoreManager : MonoBehaviour
                 break;
         }
 
-        EventManager.OnScoreChanged(Mathf.FloorToInt(baseScore * scoreMultiplier));
+        CalculateFuelBonus();
+
+        EventManager.OnBaseScoreEarned(Mathf.FloorToInt(baseScore * scoreMultiplier));
+        EventManager.OnFuelBonusEarned(Mathf.FloorToInt(fuelBonus * scoreMultiplier));
+        EventManager.OnScoreChanged(Mathf.FloorToInt((baseScore + fuelBonus) * scoreMultiplier));
+        
+        fuelBonus = 0;
+    }
+
+    void CalculateFuelBonus()
+    {
+        float remainingFuel = FindObjectOfType<FuelManager>().DetermineRemainingFuel();
+        fuelBonus = Mathf.RoundToInt(remainingFuel / 20) * 50;
+
+
+
+        Debug.Log($"Remaining Fuel: {remainingFuel}\nFuel bonus: {fuelBonus}");
     }
 }

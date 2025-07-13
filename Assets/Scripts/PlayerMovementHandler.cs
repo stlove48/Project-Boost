@@ -13,6 +13,8 @@ public class PlayerMovementHandler : MonoBehaviour
     [SerializeField] ParticleSystem rightThrusterParticles;
     [SerializeField] ParticleSystem leftThrusterParticles;
 
+    [SerializeField] FuelManager fuelManager;
+
     
     Rigidbody rb;
     AudioSource audioSource;
@@ -36,8 +38,17 @@ public class PlayerMovementHandler : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            //Thrusting
-            StartThrusting();
+            if (!fuelManager.OutOfFuel)
+            {
+                //Thrusting
+                StartThrusting();
+                fuelManager.ConsumeFuel();
+            }
+            else
+            {
+                StopThrusting();
+            }
+            
         }
         else
         {
