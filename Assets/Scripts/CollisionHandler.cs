@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    [SerializeField] float sequenceDelay = 2f;
     [SerializeField] AudioClip crashClip;
     [SerializeField] AudioClip victoryClip;
 
@@ -40,7 +39,7 @@ public class CollisionHandler : MonoBehaviour
         // Debugging
         if (Input.GetKeyDown(KeyCode.L))
         {
-            LoadNextLevel();
+            EventManager.OnLevelCompleted(SceneManager.GetActiveScene().buildIndex);
         }
 
         // Debugging
@@ -110,7 +109,7 @@ public class CollisionHandler : MonoBehaviour
         victoryParticles.Play();
         GetComponent<PlayerMovementHandler>().enabled = false;
         isTransitioning = true;
-        Invoke("LoadNextLevel", sequenceDelay * 2.5f);
+        EventManager.OnLevelCompleted(SceneManager.GetActiveScene().buildIndex);
         
     }
 
@@ -121,23 +120,7 @@ public class CollisionHandler : MonoBehaviour
         crashParticles.Play();
         GetComponent<PlayerMovementHandler>().enabled = false;
         isTransitioning = true;
-        Invoke("ReloadCurrentLevel", sequenceDelay);
-    }
-
-    private void ReloadCurrentLevel()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
-    }
-
-    void LoadNextLevel()
-    {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
-        {
-            nextSceneIndex = 1;
-        }
-        SceneManager.LoadScene(nextSceneIndex);
+        EventManager.OnLevelFailed(SceneManager.GetActiveScene().buildIndex);
     }
 
     void ToggleCollision()

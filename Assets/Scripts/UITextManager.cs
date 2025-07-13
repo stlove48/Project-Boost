@@ -7,8 +7,15 @@ public class UITextManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI scoreTMP;
     [SerializeField] TextMeshProUGUI landingTMP;
+
     [SerializeField] GameObject scoreAdditionGO;
     TextMeshProUGUI scoreAdditionTMP;
+
+    [SerializeField] GameObject bonusScoreAdditionGO;
+    TextMeshProUGUI bonusScoreAdditionTMP;
+
+    int bonusScore;
+    int baseScore;
 
     private void Start()
     {
@@ -19,27 +26,36 @@ public class UITextManager : MonoBehaviour
         } */
         
         UpdateScoreText(ScoreManager.smInstance.Score);
-        landingTMP.text = "";
+        ResetLandingText(true);
 
         scoreAdditionTMP = scoreAdditionGO.GetComponent<TextMeshProUGUI>();
         scoreAdditionTMP.text = "";
+
+        bonusScoreAdditionTMP = bonusScoreAdditionGO.GetComponent<TextMeshProUGUI>();
+        bonusScoreAdditionTMP.text = "";
     }
 
     private void OnEnable()
     {
         EventManager.ScoreChanged += ProcessScoreChange;
         EventManager.ShipLanded += ShowLandingRating;
+        EventManager.FuelBonusEarned += UpdateBonusScoreText;
+        EventManager.BaseScoreEarned += UpdateBaseScoreText;
+        EventManager.LevelLoaded += ResetLandingText;
     }
 
     private void OnDisable()
     {
         EventManager.ScoreChanged -= ProcessScoreChange;
         EventManager.ShipLanded -= ShowLandingRating;
+        EventManager.FuelBonusEarned -= UpdateBonusScoreText;
+        EventManager.BaseScoreEarned -= UpdateBaseScoreText;
+        EventManager.LevelLoaded -= ResetLandingText;
     }
 
-    void Update()
+    void ResetLandingText(bool levelLoaded)
     {
-        
+        landingTMP.text = "";
     }
 
     void UpdateScoreText(int score)
@@ -52,13 +68,13 @@ public class UITextManager : MonoBehaviour
         switch (landingRating)
         {
             case landingRating.BAD:
-                landingTMP.text = "What a rough landing...";
+                landingTMP.text = $"What a rough landing...";
                 break;
             case landingRating.GOOD:
-                landingTMP.text = "That was a solid landing!";
+                landingTMP.text = $"That was a solid landing!";
                 break;
             case landingRating.PERFECT:
-                landingTMP.text = "Absolutely textbook landing. Well done!";
+                landingTMP.text = $"Absolutely textbook landing. Well done!";
                 break;
         }
     }
@@ -71,10 +87,31 @@ public class UITextManager : MonoBehaviour
         scoreAdditionGO.SetActive(false);
     }
 
+    IEnumerator ShowFloatingBonusScore(int score)
+    {
+        bonusScoreAdditionGO.SetActive(true);
+        bonusScoreAdditionTMP.text = $"Bonus: +{score}";
+        yield return new WaitForSeconds(2f);
+        bonusScoreAdditionGO.SetActive(false);
+    }
+
     // Scoring delegate
     void ProcessScoreChange(int score)
     {
         UpdateScoreText(score);
-        StartCoroutine(ShowFloatingScore(score));
+        StartCoroutine(ShowFloatingScore(baseScore));
+        StartCoroutine(ShowFloatingBonusScore(bonusScore));
+    }
+
+    // Points coming from FuelBonus currently, calculated in ScoreManager/CalculateFuelBonus
+    void UpdateBonusScoreText(int score)
+    {
+        bonusScore = score;
+    }
+
+    // Points coming from Base Score currently, calculated in ScoreManager/CalculateScore
+    void UpdateBaseScoreText(int score)
+    {
+        baseScore = score;
     }
 }

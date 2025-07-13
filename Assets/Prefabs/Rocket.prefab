@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 4880507625828463435}
   - component: {fileID: 6077392528990907747}
   - component: {fileID: 5188560780661509845}
+  - component: {fileID: 8126144214560522456}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -612,6 +613,7 @@ MonoBehaviour:
   mainThrusterParticles: {fileID: 4030162228904028013}
   rightThrusterParticles: {fileID: 3290482800473355183}
   leftThrusterParticles: {fileID: 6941763274639483842}
+  fuelManager: {fileID: 8126144214560522456}
 --- !u!82 &4880507625828463435
 AudioSource:
   m_ObjectHideFlags: 0
@@ -733,11 +735,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcaa4d3c09db0d449a0b1a8accac4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sequenceDelay: 2
   crashClip: {fileID: 8300000, guid: 20533565e81c6be43b0bdc90644c0c4f, type: 3}
   victoryClip: {fileID: 8300000, guid: ef9f77f81f6a08142b8723380aefc668, type: 3}
   crashParticles: {fileID: 4702437165434969300}
   victoryParticles: {fileID: 5630436016879702985}
+--- !u!114 &8126144214560522456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113316269501204159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de38b0181c1456b468f7b5de70c0e2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelConsumptionRate: 10
 --- !u!1 &5480606223291315554
 GameObject:
   m_ObjectHideFlags: 0
