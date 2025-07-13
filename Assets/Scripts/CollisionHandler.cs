@@ -13,10 +13,17 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem crashParticles;
     [SerializeField] ParticleSystem victoryParticles;
 
-    private int bonusPoints = 300;
-    private int landingPoints = 500;
-    private float bonusAngleMinimum = 340f;
-    private float bonusAngleMaximum = 15f;
+    // If the rocket lands between 90 and 46 degrees off straight down
+    private float badScoreAngleMin = 290f;
+    private float badScoreAngleMax = 70f;
+
+    // If the rocket lands between 45 and 16 degrees off straight down
+    private float goodScoreAngleMin = 330f;
+    private float goodScoreAngleMax = 30f;
+
+    // If the rocket lands between 5 and 0 degrees off straight down
+    private float perfectScoreAngleMin = 355f;
+    private float perfectScoreAngleMax = 5f;
 
     AudioSource audioSource;
 
@@ -30,11 +37,13 @@ public class CollisionHandler : MonoBehaviour
 
     private void Update()
     {
+        // Debugging
         if (Input.GetKeyDown(KeyCode.L))
         {
             LoadNextLevel();
         }
 
+        // Debugging
         if (Input.GetKeyDown(KeyCode.C))
         {
             ToggleCollision();
@@ -60,15 +69,32 @@ public class CollisionHandler : MonoBehaviour
             case "Fuel":
                 break;
             case "Finish":
-                if(transform.eulerAngles.z > bonusAngleMinimum || transform.eulerAngles.z < bonusAngleMaximum)
+
+
+                if(transform.eulerAngles.z > perfectScoreAngleMin || transform.eulerAngles.z < perfectScoreAngleMax)
                 {
-                    EventManager.OnScoreChanged(bonusPoints + landingPoints);
+                    EventManager.OnShipLanded(landingRating.PERFECT);
+                    Debug.Log("Perfect landing!");
                 }
-                else 
+                else if (transform.eulerAngles.z > goodScoreAngleMin || transform.eulerAngles.z < goodScoreAngleMax)
                 {
-                    EventManager.OnScoreChanged(landingPoints);
+                    EventManager.OnShipLanded(landingRating.GOOD);
+                    Debug.Log("Good landing!");
                 }
-                
+                else if (transform.eulerAngles.z > badScoreAngleMin || transform.eulerAngles.x < badScoreAngleMax)
+                {
+                    EventManager.OnShipLanded(landingRating.BAD);
+                    Debug.Log("Bad landing!");
+                }
+                else
+                {
+                    Debug.Log("Crash angle: " + transform.eulerAngles.z);
+                    StartCrashSequence();
+                    break;
+                }
+
+                Debug.Log("Landing angle: " + transform.eulerAngles.z);
+
                 StartVictorySequence();
                 break;
             default:

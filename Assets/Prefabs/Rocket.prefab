@@ -533,9 +533,9 @@ GameObject:
   - component: {fileID: 1729475738502173956}
   - component: {fileID: 1665463233}
   - component: {fileID: 1665463232}
-  - component: {fileID: 2284081611623045970}
   - component: {fileID: 4880507625828463435}
   - component: {fileID: 6077392528990907747}
+  - component: {fileID: 5188560780661509845}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -612,23 +612,6 @@ MonoBehaviour:
   mainThrusterParticles: {fileID: 4030162228904028013}
   rightThrusterParticles: {fileID: 3290482800473355183}
   leftThrusterParticles: {fileID: 6941763274639483842}
---- !u!114 &2284081611623045970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5113316269501204159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fcaa4d3c09db0d449a0b1a8accac4a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sequenceDelay: 2
-  crashClip: {fileID: 8300000, guid: 20533565e81c6be43b0bdc90644c0c4f, type: 3}
-  victoryClip: {fileID: 8300000, guid: ef9f77f81f6a08142b8723380aefc668, type: 3}
-  crashParticles: {fileID: 4702437165434969300}
-  victoryParticles: {fileID: 5630436016879702985}
 --- !u!82 &4880507625828463435
 AudioSource:
   m_ObjectHideFlags: 0
@@ -738,6 +721,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5392275, y: 2.5675108, z: 1}
   m_Center: {x: -0.003508091, y: -0.10355151, z: 0}
+--- !u!114 &5188560780661509845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113316269501204159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fcaa4d3c09db0d449a0b1a8accac4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequenceDelay: 2
+  crashClip: {fileID: 8300000, guid: 20533565e81c6be43b0bdc90644c0c4f, type: 3}
+  victoryClip: {fileID: 8300000, guid: ef9f77f81f6a08142b8723380aefc668, type: 3}
+  crashParticles: {fileID: 4702437165434969300}
+  victoryParticles: {fileID: 5630436016879702985}
 --- !u!1 &5480606223291315554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1193,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1456249489394358443}
     m_Modifications:
     - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
@@ -1248,6 +1249,7 @@ PrefabInstance:
       value: -89.929016
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
 --- !u!198 &3290482800473355183 stripped
 ParticleSystem:
@@ -1264,6 +1266,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1456249489394358443}
     m_Modifications:
     - target: {fileID: 1113205305641416, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
@@ -1315,6 +1318,7 @@ PrefabInstance:
       value: -0.000015258789
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a3553fd250eb92d4091bebde350c6739, type: 3}
 --- !u!4 &3837142789297171749 stripped
 Transform:
@@ -1331,6 +1335,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1456249489394358443}
     m_Modifications:
     - target: {fileID: 1469142659871422, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
@@ -1382,6 +1387,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: ab79a37535b979f48b6de56e3a0a5cb0, type: 3}
 --- !u!198 &4702437165434969300 stripped
 ParticleSystem:
@@ -1398,6 +1404,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1456249489394358443}
     m_Modifications:
     - target: {fileID: 1664836844622050, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
@@ -1469,6 +1476,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
 --- !u!4 &5542928179269618719 stripped
 Transform:
@@ -1485,6 +1493,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1456249489394358443}
     m_Modifications:
     - target: {fileID: 584678573886053986, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
@@ -1540,6 +1549,7 @@ PrefabInstance:
       value: -90.072
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b06ebeeaf0ac044aeed997d98443c2, type: 3}
 --- !u!198 &6941763274639483842 stripped
 ParticleSystem:

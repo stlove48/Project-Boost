@@ -1,11 +1,16 @@
+using Palmmedia.ReportGenerator.Core.Reporting.Builders;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum landingRating { BAD, GOOD, PERFECT};
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager smInstance;
 
+    private float scoreMultiplier = 1.0f; // Default value
+    private int baseScore = 500; // Base score for a successful landing
 
     int score = 0;
     public int Score { get { return score; } }
@@ -27,12 +32,14 @@ public class ScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.ShipLanded += CalculateScore;
         EventManager.ScoreChanged += AddScore;
     }
 
     private void OnDisable()
     {
-        EventManager.ScoreChanged -= AddScore;
+        EventManager.ShipLanded -= CalculateScore;
+        EventManager.ScoreChanged += AddScore;
     }
 
     // Update is called once per frame
@@ -46,5 +53,24 @@ public class ScoreManager : MonoBehaviour
         score += changeAmount;
         Debug.Log(Score);
         
+    }
+
+    void CalculateScore (landingRating landingRating)
+    {
+
+        switch (landingRating)
+        {
+            case landingRating.PERFECT:
+                scoreMultiplier = 1.5f;
+                break;
+            case landingRating.GOOD:
+                scoreMultiplier = 1.0f;
+                break;
+            case landingRating.BAD:
+                scoreMultiplier = 0.2f;
+                break;
+        }
+
+        EventManager.OnScoreChanged(Mathf.FloorToInt(baseScore * scoreMultiplier));
     }
 }
