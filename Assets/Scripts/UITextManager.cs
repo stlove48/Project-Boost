@@ -14,6 +14,8 @@ public class UITextManager : MonoBehaviour
     [SerializeField] GameObject bonusScoreAdditionGO;
     TextMeshProUGUI bonusScoreAdditionTMP;
 
+    [SerializeField] GameObject landingTextGO;
+
     int bonusScore;
     int baseScore;
 
@@ -55,7 +57,7 @@ public class UITextManager : MonoBehaviour
 
     void ResetLandingText(bool levelLoaded)
     {
-        landingTMP.text = "";
+        landingTextGO.SetActive(false);
     }
 
     void UpdateScoreText(int score)
@@ -65,18 +67,23 @@ public class UITextManager : MonoBehaviour
 
     void ShowLandingRating(landingRating landingRating)
     {
-        switch (landingRating)
+        if (!landingTextGO.activeSelf)
         {
-            case landingRating.BAD:
-                landingTMP.text = $"What a rough landing...";
-                break;
-            case landingRating.GOOD:
-                landingTMP.text = $"That was a solid landing!";
-                break;
-            case landingRating.PERFECT:
-                landingTMP.text = $"Absolutely textbook landing. Well done!";
-                break;
+            landingTextGO.SetActive(true);
+            switch (landingRating)
+            {
+                case landingRating.BAD:
+                    landingTMP.text = $"What a rough landing...";
+                    break;
+                case landingRating.GOOD:
+                    landingTMP.text = $"That was a solid landing!";
+                    break;
+                case landingRating.PERFECT:
+                    landingTMP.text = $"Absolutely textbook landing. Well done!";
+                    break;
+            }
         }
+        
     }
 
     IEnumerator ShowFloatingScore(int score)

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     int mainMenuIndex = 0;
     int firstLevelIndex = 1;
     [SerializeField] GameObject scoreCanvas;
+    [SerializeField] GameObject optionsCanvas;
 
     
     
@@ -31,19 +32,26 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            QuitGame();
+            ToggleOptionsMenu();
         }
     }
 
     public void QuitGame() 
     {
         Debug.Log("Quit application");
-            Application.Quit();
+        Application.Quit();
     }
 
     public void LoadFirstLevel() 
     {
         SceneManager.LoadScene(firstLevelIndex);
         scoreCanvas.SetActive(true);
+    }
+
+    public void ToggleOptionsMenu()
+    {
+        // Toggle options menu and pause when active
+        optionsCanvas.SetActive(!optionsCanvas.activeSelf);
+        Time.timeScale = optionsCanvas.activeSelf? 0 : 1;
     }
 }
