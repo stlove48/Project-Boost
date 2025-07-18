@@ -57,9 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerMovementHandler.cs" />
+    <Compile Include="Assets\Scripts\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\PlanetSpinner.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\CollisionHandler.cs" />
+    <Compile Include="Assets\Scripts\AudioToggle.cs" />
     <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\FuelManager.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
@@ -68,10 +70,8 @@
     <Compile Include="Assets\Scripts\UITextManager.cs" />
     <Compile Include="Assets\Scripts\LevelLoader.cs" />
     <Compile Include="Assets\Scripts\QuitApplication.cs" />
-    <Compile Include="Assets\Scripts\OscilliatingObstacle.cs" />
-    <Compile Include="Assets\Scripts\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\AudioSlider.cs" />
-    <Compile Include="Assets\Scripts\AudioToggle.cs" />
+    <Compile Include="Assets\Scripts\OscilliatingObstacle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
