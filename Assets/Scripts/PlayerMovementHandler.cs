@@ -48,13 +48,11 @@ public class PlayerMovementHandler : MonoBehaviour
             {
                 StopThrusting();
             }
-            
         }
         else
         {
             StopThrusting();
         }
-
     }
 
     void ProcessRotation()
