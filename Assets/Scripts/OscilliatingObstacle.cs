@@ -10,6 +10,7 @@ public class OscilliatingObstacle : MonoBehaviour
     [SerializeField] Vector3 rotationVector;
     [SerializeField] float period = 2f;
     [SerializeField] bool canRotate;
+    [SerializeField] bool rotateSine;
 
     float movementFactor;
     const float tau = Mathf.PI * 2;
@@ -32,7 +33,14 @@ public class OscilliatingObstacle : MonoBehaviour
 
         Vector3 offset = movementVector * movementFactor;
         transform.position = startingPosition + offset;
-        if(canRotate ) { transform.Rotate(rotationVector, Space.Self); }
+        if(canRotate && !rotateSine) 
+        { 
+            transform.Rotate(rotationVector, Space.Self); 
+        }
+        else if (canRotate && rotateSine)
+        {
+            transform.Rotate(rotationVector * rawSinWave, Space.Self);
+        }
         
     }
 }
